@@ -14,11 +14,8 @@ import android.widget.FrameLayout;
 
 import am.aua.com.dbproject.Fragments.AuthorsFragment;
 import am.aua.com.dbproject.Fragments.BlackListFragment;
-import am.aua.com.dbproject.Fragments.BooksRecyclerFragment;
 import am.aua.com.dbproject.Fragments.BorrowsFragment;
 import am.aua.com.dbproject.Fragments.CategoriesFragment;
-import am.aua.com.dbproject.Utils.BorrowsItems;
-import am.aua.com.dbproject.Utils.Categories;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -77,12 +74,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.authors) {
             fragment = new AuthorsFragment();
             tag = AuthorsFragment.TAG;
-        }
-        else if (id == R.id.blackList) {
+        } else if (id == R.id.blackList) {
             fragment = new BlackListFragment();
             tag = BlackListFragment.TAG;
-        }
-        else if(id == R.id.borrows){
+        } else if (id == R.id.borrows) {
             fragment = new BorrowsFragment();
             tag = BorrowsFragment.TAG;
         }

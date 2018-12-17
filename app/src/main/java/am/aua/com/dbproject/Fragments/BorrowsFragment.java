@@ -50,6 +50,9 @@ public class BorrowsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        url = getString(R.string.url_root) + "admin/borrow";
+
         borrowsItems = new ArrayList<>();
     }
 

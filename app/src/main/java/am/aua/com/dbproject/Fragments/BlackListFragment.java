@@ -44,12 +44,13 @@ public class BlackListFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
     }
-    String url = "http://10.5.0.135:8080/admin/black-list";
+    String url ;//= "http://10.5.0.135:8080/admin/black-list";
     RequestQueue requestQueue;
     LinearLayout layout;
 
     @Override
     public void onAttach(Context context) {
+        url = getString(R.string.url_root) + "admin/black-list";
         this.context = context;
         super.onAttach(context);
         requestQueue =  Volley.newRequestQueue(context);

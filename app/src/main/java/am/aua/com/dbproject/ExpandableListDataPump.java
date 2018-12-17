@@ -72,33 +72,35 @@ public class ExpandableListDataPump {
 //    }
 
     public void request(final ServerCallback callback) {
+        url = mContext.getString(R.string.url_root) + "admin/categories";
+
 
         requestQueue = Volley.newRequestQueue(mContext);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // Do something with response
-                        //mTextView.setText(response.toString());
-                        // Process the JSON
-                        try {
-                            // Get the JSON array
-                            JSONArray array = response.getJSONArray("data");
+            @Override
+            public void onResponse(JSONObject response) {
+                // Do something with response
+                //mTextView.setText(response.toString());
+                // Process the JSON
+                try {
+                    // Get the JSON array
+                    JSONArray array = response.getJSONArray("data");
 
-                            // Loop through the array elements
-                            for (int i = 0; i < array.length(); i++) {
-                                // Get current json object
-                                JSONObject borrows = array.getJSONObject(i);
-                                Gson gson = new Gson();
-                                Categories categories = gson.fromJson(borrows.toString(), Categories.class);
-                                expandableListDetail.put(categories.getCategoryName(),categories.getSubCategories());
+                    // Loop through the array elements
+                    for (int i = 0; i < array.length(); i++) {
+                        // Get current json object
+                        JSONObject borrows = array.getJSONObject(i);
+                        Gson gson = new Gson();
+                        Categories categories = gson.fromJson(borrows.toString(), Categories.class);
+                        expandableListDetail.put(categories.getCategoryName(), categories.getSubCategories());
 // categoriesList.add(categories);
-                            }
-                            callback.onSuccess(expandableListDetail);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                     }
-                },
+                    callback.onSuccess(expandableListDetail);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -109,9 +111,8 @@ public class ExpandableListDataPump {
         requestQueue.add(jsonObjectRequest);
     }
 
-    void createData()
-    {
-        for (Categories categories:categoriesList) {
+    void createData() {
+        for (Categories categories : categoriesList) {
 
         }
     }

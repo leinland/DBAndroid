@@ -48,6 +48,9 @@ public class BooksRecyclerFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        url = getString(R.string.url_root) + "admin/books";
+        subUrl = getString(R.string.url_root) + "admin/books/category/";
         bookList = new ArrayList<>();
     }
 

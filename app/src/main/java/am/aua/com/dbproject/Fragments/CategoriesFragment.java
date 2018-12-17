@@ -20,7 +20,6 @@ import java.util.List;
 
 import am.aua.com.dbproject.ExpandableListDataPump;
 import am.aua.com.dbproject.R;
-import am.aua.com.dbproject.Utils.Categories;
 import am.aua.com.dbproject.Utils.CustomExpandableListAdapter;
 import am.aua.com.dbproject.Utils.ServerCallback;
 import am.aua.com.dbproject.Utils.SubCategory;
@@ -44,7 +43,7 @@ public class CategoriesFragment extends Fragment {
         expandableListView = v.findViewById(R.id.expandable_list);
 
 
-         ExpandableListDataPump.getInstance(context).request(new ServerCallback() {
+        ExpandableListDataPump.getInstance(context).request(new ServerCallback() {
             @Override
             public void onSuccess(HashMap<String, List<SubCategory>> result) {
                 expandableListDetail = result;
@@ -97,7 +96,7 @@ public class CategoriesFragment extends Fragment {
         });
 
         return v;
-}
+    }
 
     @Override
     public void onAttach(Context context) {

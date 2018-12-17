@@ -18,12 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -40,13 +38,17 @@ public class DetailsFragment extends Fragment {
     Context context;
     JSONObject jsonBody;
     TextView bookQuantity;
+    BookItem bookItem;
 
     @Override
     public void onAttach(Context context) {
         this.context = context;
         super.onAttach(context);
+        url = getString(R.string.url_root) + "admin/take-book";
+
+
     }
-    BookItem bookItem;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -59,7 +61,6 @@ public class DetailsFragment extends Fragment {
         TextView bookDescription = view.findViewById(R.id.book_description_details);
         bookQuantity = view.findViewById(R.id.book_quantity_details);
         Button takeButton = view.findViewById(R.id.take_button);
-
 
 
         takeButton.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +97,7 @@ public class DetailsFragment extends Fragment {
                 String userId = input.getText().toString();
                 try {
                     jsonBody.put("userId", userId);
-                    jsonBody.put("bookId",String.valueOf( bookItem.getId()));
+                    jsonBody.put("bookId", String.valueOf(bookItem.getId()));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -123,7 +124,7 @@ public class DetailsFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
-                        int a =  Integer.valueOf(bookQuantity.getText().toString());
+                        int a = Integer.valueOf(bookQuantity.getText().toString());
                         a--;
                         bookQuantity.setText(String.valueOf(a));
                     }

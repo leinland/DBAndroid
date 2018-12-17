@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,21 +31,21 @@ import java.util.List;
 import am.aua.com.dbproject.R;
 import am.aua.com.dbproject.Utils.AuthorItem;
 import am.aua.com.dbproject.Utils.AuthorsRecyclerViewAdapter;
-import am.aua.com.dbproject.Utils.BlackListItem;
-import am.aua.com.dbproject.Utils.BlackListRecyclerAdapter;
 
 public class AuthorsFragment extends Fragment {
+    public final static int TAG = 78;
     RecyclerView recyclerView;
     Context context;
     List<AuthorItem> authorItems;
-    public final static int TAG = 78;
-    String url = "http://10.5.0.135:8080/admin/authors";
+    String url; //"http://10.5.0.135:8080/admin/authors";
     RequestQueue requestQueue;
     ConstraintLayout layout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         authorItems = new ArrayList<>();
+
+        url = getString(R.string.url_root)+"admin/authors";
 //        authorItems.add(new AuthorItem(1,"Ernesto","Parpeci"));
 //        authorItems.add(new AuthorItem(1,"Ernesto","Parpeci"));
 //        authorItems.add(new AuthorItem(1,"Ernesto","Parpeci"));
@@ -62,7 +61,7 @@ public class AuthorsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         this.context = context;
-        requestQueue =  Volley.newRequestQueue(context);
+        requestQueue = Volley.newRequestQueue(context);
 
         super.onAttach(context);
 
@@ -71,14 +70,15 @@ public class AuthorsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.author_recycler,container,false);
-        recyclerView  = v.findViewById(R.id.authors_recycler_view);
+        View v = inflater.inflate(R.layout.author_recycler, container, false);
+        recyclerView = v.findViewById(R.id.authors_recycler_view);
         layout = v.findViewById(R.id.layout);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         request();
         return v;
     }
+
     void request() {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,
                 null,
@@ -101,7 +101,7 @@ public class AuthorsFragment extends Fragment {
                                 AuthorItem blackListItem = gson.fromJson(borrows.toString(), AuthorItem.class);
                                 authorItems.add(blackListItem);
                             }
-                            recyclerView.setAdapter(new AuthorsRecyclerViewAdapter(context,authorItems,getFragmentManager()));
+                            recyclerView.setAdapter(new AuthorsRecyclerViewAdapter(context, authorItems, getFragmentManager()));
 
                         } catch (JSONException e) {
                             e.printStackTrace();

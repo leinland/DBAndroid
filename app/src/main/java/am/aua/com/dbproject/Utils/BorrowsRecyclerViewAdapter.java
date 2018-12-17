@@ -89,7 +89,7 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
 
     void sendRequest(JSONObject jsonBody,final CheckBox checkBox, final Button button) {
         RequestQueue queue = Volley.newRequestQueue(context);
-
+        url = context.getString(R.string.url_root) + "admin/return";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, jsonBody,
                 new Response.Listener<JSONObject>() {
